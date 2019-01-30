@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>DMS 110</title>
+<script>
+
+var bouncerList = [
+    { x:400, y:300, angle:0,   speedx:10,  speedy:10,  id:'A' },
+    { x:200, y:300, angle:30,  speedx:8,   speedy:-5,  id:'B' },
+    { x:500, y:400, angle:0,   speedx:-20, speedy:7,   id:'C' },
+    { x:400, y:50,  angle:-50, speedx:-5,  speedy:-15, id:'D' }
+    ]
+
+function updateAll() {
+    for (var i=0; i < bouncerList.length; i = i+1)
+        updateBouncer(bouncerList[i]);
+    }
+
+function updateBouncer(bouncer) {
+    bouncer.angle = bouncer.angle + 9;
+    bouncer.x = bouncer.x + bouncer.speedx;
+    bouncer.y = bouncer.y + bouncer.speedy;
+    var bounce = false;
+    if (bouncer.x < 0) {
+        bouncer.speedx = 10;
+        bounce = true;
+        }
+    else if (bouncer.x > 770) {
+        bouncer.speedx = -10;
+        bounce = true;
+        }
+    if (bouncer.y < 0) {
+        bouncer.speedy = 10;
+        bounce = true;
+        }
+    else if (bouncer.y > 570) {
+        bouncer.speedy = -10;
+        bounce = true;
+        }
+    document.getElementById(bouncer.id).style.transform = "translate(" + bouncer.x + "px," + bouncer.y + "px) rotate(" + bouncer.angle + "deg)";
+    if (bounce)
+        bounceEffect(bouncer);
+    }
+
+function bounceEffect(bouncer) {
+    document.getElementById('sound').currentTime = 0;
+    document.getElementById('sound').play();
+    document.getElementById(bouncer.id).innerHTML = 'boing';
+    document.getElementById('box').style.background = 'yellow';
+    window.setTimeout(endBounceEffect,100,bouncer);
+    }
+
+function endBounceEffect(bouncer) {
+    document.getElementById(bouncer.id).innerHTML = bouncer.id;
+    document.getElementById('box').style.background = 'white';
+    }
+
+function init() {
+    window.setInterval(updateAll,50);
+    }
+
+window.onload = init;
+</script>
+</head>
+
+<body>
+<div id="box" style="width: 800px; height: 600px; border: solid; position: relative">
+<div id="A" style="width: 30px; font-size: 30px; position: absolute; top: 0; left: 0">A</div>
+<div id="B" style="width: 30px; font-size: 30px; position: absolute; top: 0; left: 0">B</div>
+<div id="C" style="width: 30px; font-size: 30px; position: absolute; top: 0; left: 0">C</div>
+<div id="D" style="width: 30px; font-size: 30px; position: absolute; top: 0; left: 0">D</div>
+</div>
+<audio id="sound" src="bell.ogg"></audio>
+</body>
+
+</html>
