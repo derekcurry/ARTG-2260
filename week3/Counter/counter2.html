@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Counter</title>
+
+<style type="text/css">
+	.btn {
+		position: fixed;
+		margin-top: -400px;
+		display: inline-block;
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+
+	}
+	.container {
+		text-align: center;
+		margin: auto;
+	}
+	#num {
+		width: 200px;
+		height: 200px;
+		background: rgb(0,0,0);
+		color: rgb(255,255,255);
+		font-size: 190px;
+		font-weight: bold;
+		font-family: helvetica;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 50px;
+		text-align: center;
+		border-radius: 20px;
+		padding-top: 20px;
+		padding-right: 20px;
+	}
+</style>
+
+</head>
+
+<body>
+<div class="container">
+	<h6 id="num">0</h6>
+	<button class="btn" id="clicker">Count</button>
+</div>
+
+
+</body>
+<script type="text/javascript">
+
+var currentCount = 0;
+	function counter() {
+		//currentCount += 1;
+		currentCount = addOne(currentCount);
+		
+		document.getElementById('num').innerHTML = currentCount;
+		console.log(currentCount);
+		//checkPadding();
+
+		var r = genRan(255);
+		var g = genRan(100);
+		var b = genRan(10);
+		
+
+		//console.log(r);
+		document.getElementById('num').style.background = 'rgb('+r+','+g+','+b+')';
+	}
+
+	function checkPadding () {
+		if (currentCount >= 10) {
+			document.getElementById('num').style.background = "blue"
+		}
+	}
+
+	function genRan(number) {
+		return Math.floor((Math.random() * number) + 1);	
+	}
+
+	function addOne (number) {
+		return number + 1;
+	}
+
+	document.getElementById("clicker").addEventListener("click", counter);
+</script>
+
+</html>

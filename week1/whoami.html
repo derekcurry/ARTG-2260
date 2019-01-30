@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ARTG 2260 | Programming Basics</title>
+
+<style type="text/css">
+
+	#image {
+		
+		background-color: #55bded;
+		padding: 10px;
+	}
+	#image img{
+		border-style: dashed;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	#quote {
+		margin-top: 10px;
+		font-family: "Lucida Console", Monaco, monospace;
+		color: #333;
+		font-size: 28px;
+	}
+	#name {
+		font-family: Arial, Helvetica, sans-serif;
+		color: #54ed5a;
+		background-color: black;
+		padding: 10px;
+		padding-left: 10%;
+	}
+
+</style>
+
+
+</head>
+
+<body>
+
+<!-- This is a HTML comment, what appears here will not show up on the page -->
+<div id="name"></div>
+<div id="image"></div>
+<div id="quote"></div>
+<br>
+
+</body>
+<script>
+	// This is a single line JavaScript comment
+
+	alert("Hello! My name is Derek Curry!");
+	document.getElementById('name').innerHTML = '<h1>Derek Curry</h1>';
+
+	document.getElementById('quote').innerHTML = "'Never argue with a fool, onlookers may not be able to tell the difference.'<b>― Mark Tawin </b>";
+
+	document.getElementById('image').innerHTML = '<img src="http://www.beliefnet.com/columnists/wholeliving/files/2011/08/tinypig.jpg">';
+
+	/*
+	I know the following programming languages:
+
+	Python
+	JavaScript
+	ActionScript 3 (totally useless now)
+	Processing
+	Java
+	PHP
+	SQL
+	C++
+	C#
+
+	*/
+
+	console.log('My goal for the class is for all of the students to have a reasonable command of the JavaScript programming language and an understanding of digital art.');
+</script>
+</html>

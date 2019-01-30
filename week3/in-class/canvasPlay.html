@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+
+      #myCanvas {
+        background-color: red;
+
+      }
+
+    </style>
+  </head>
+  <body>
+
+    <canvas id="myCanvas" width="700" height="400"></canvas>
+
+  </body>
+
+  <script>
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+
+      function rect1(x, y, w, h, fill, l_width) {
+        context.beginPath();
+        // Start X, Start Y, Width, Height
+        context.rect(x, y, w, h);
+        //context.fillStyle = 'rgba(17, 163, 250, 0.75)';
+        context.fillStyle = fill;
+        context.fill();
+        context.lineWidth = l_width;
+        //context.strokeStyle = 'green';
+        context.stroke();
+      }
+
+
+
+      function ranStroke() {
+        return Math.floor((Math.random() * 25) + 1);  
+      }
+
+      function ranColor() {
+        var r = Math.floor((Math.random() * 256));
+        var g = Math.floor((Math.random() * 256));
+        var b = Math.floor((Math.random() * 256));
+        return 'rgb('+r+','+g+','+b+')';
+      }
+
+      function xPos() {
+        return Math.floor((Math.random() * 600));
+      }
+
+      function writeText(words) {
+        context.fillStyle = 'white';
+        context.font = 'italic 40px Calibri';
+        context.fillText(words, 150, 100);
+        context.lineWidth = 5;
+        context.stroke();
+      }
+      
+      // Call functions
+      rect1(xPos(), 50, 20, 100, ranColor(), ranStroke());
+      rect1(xPos(), 200, 50, 300, ranColor(), ranStroke());
+      writeText('My words are here!');
+      rect1(xPos(), 200, 100, 50, ranColor(), ranStroke());
+      rect1(xPos(), 300, 50, 50, ranColor(), ranStroke());
+      rect1(xPos(), 150, 25, 75, ranColor(), ranStroke());
+
+      
+
+      
+
+    </script>
+</html>      
