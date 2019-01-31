@@ -33,12 +33,12 @@ function gradientCircle(x,y,r,c1,c2,stroke,strokecolor) {
 	context.restore();  // context is restored
 }
 
+// Draw triangle using rotation
 function drawTriangle(xTop, yTop, lengthSide, rotation, fillColor, strokeWidth, strokeColor) {
 	// Made by: Tomasz Pietruszka
 
 	// xTop and yTop refer to the top point of the equilateral triangle
 	// rotation is a clockwise rotation around that point in Radians
-
 	context.save();
 
 	context.beginPath();
