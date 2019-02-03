@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ARTG 2260</title>
+<style>
+    canvas { border:1px solid black; }
+</style>
+<script>
+/*
+    This program is adding keys that are pressed to an object named keyPressed. The key_is_down and key_is_up functions change the value of the specific key property in the object to true or false.
+
+    The Draw function checks to see if specific keys are pressed (they will be a property of the object and return 'true') and changes the location of the text they are.
+*/
+var x = 100, y = 200;
+var keyPressed = {};
+var txt = "Move Me!";
+var color = "blue";
+
+function init() {
+    canvas = document.getElementById('myCanvas');
+    context = canvas.getContext('2d');
+    requestAnimationFrame(draw);
+    document.addEventListener('keydown', keydown);
+    document.addEventListener('keyup', keyup);
+}
+
+function draw() {
+    if (keyPressed['ArrowRight']) {
+        x = x + 10;
+    }
+    else if (keyPressed['ArrowLeft']) {
+        x = x - 10;
+    }
+    else if (keyPressed['ArrowUp']) {
+        y = y - 10;
+    } 
+    else if (keyPressed['ArrowDown']) {
+        y = y + 10;
+    }
+    else if (keyPressed[' ']) {
+        txt = 'Spacebar!';
+        if(color == 'blue') {
+            color = 'red';
+        } else {
+            color = 'blue';
+        } 
+    } 
+    context.clearRect(0,0,canvas.width,canvas.height);
+    context.font = "50px serif";
+    context.fillStyle = color;
+    context.fillText(txt,x,y);
+    requestAnimationFrame(draw);
+}
+
+// Add the key to the keyPressed object
+function keydown(e) {
+    console.log(e.key);
+    keyPressed[e.key] = true;
+    txt = 'Key: '+ e.key;
+}
+
+function keyup(e) {
+    keyPressed[e.key] = false;
+}
+
+window.onload = init;
+
+</script>
+</head>
+
+<body>
+<canvas id="myCanvas" width="500" height="500">
+</canvas>
+<p>This program uses event.key to recognize the key</p>
+</body>
+
+</html>

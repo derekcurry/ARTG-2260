@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ARTG 2260</title>
+<style>
+    canvas { border:1px solid black; }
+</style>
+<script>
+/*
+    This program is adding keys that are pressed to an object named keyPressed. The key_is_down and key_is_up functions change the value of the specific key property in the object to true or false.
+
+    The Draw function checks to see if specific keys are pressed (they will be a property of the object and return 'true') and changes the location of the text they are.
+*/
+var x = 100, y = 200;
+var keyPressed = {};
+var txt = "Move Me!";
+var color = "blue";
+
+function init() {
+    canvas = document.getElementById('myCanvas');
+    context = canvas.getContext('2d');
+    requestAnimationFrame(draw);
+    document.addEventListener('keydown', key_is_down);
+    document.addEventListener('keyup', key_is_up);
+}
+
+// Find a keycode: https://keycode.info/
+function draw() {
+    if (keyPressed[39]) {
+        x = x + 10;
+    }
+    else if (keyPressed[37]) {
+        x = x - 10;
+    }
+    else if (keyPressed[38]) {
+        y = y - 10;
+    } 
+    else if (keyPressed[40]) {
+        y = y + 10;
+    } else if (keyPressed[32]) {
+        color = ranColor();
+    }
+
+    context.clearRect(0,0,canvas.width,canvas.height);
+    context.font = "50px serif";
+    context.fillStyle = color;
+    context.fillText(txt,x,y);
+    requestAnimationFrame(draw);
+}
+
+// Add the key to the keyPressed object
+function key_is_down(e) {
+    //console.log(e);
+    keyPressed[e.keyCode] = true;
+    txt = 'keyCode: '+e.keyCode;
+}
+
+function key_is_up(e) {
+    keyPressed[e.keyCode] = false;
+}
+
+function ranColor() {
+    return 'rgb('+Math.floor((Math.random() * 255) + 1)+','+Math.floor((Math.random() * 255) + 1)+','+Math.floor((Math.random() * 255) + 1)+')';
+}
+
+window.onload = init;
+
+</script>
+</head>
+
+<body>
+<canvas id="myCanvas" width="500" height="500">
+</canvas>
+<p>This program uses event.keyCode to recognize the key</p>
+</body>
+
+</html>

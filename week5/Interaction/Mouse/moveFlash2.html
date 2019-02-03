@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Moving with the mouse</title>
+<style>
+h1 {
+    text-align: center;
+}
+canvas { 
+    border:1px solid black; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.text {
+    text-align: center;
+}
+</style>
+<script>
+var canvas;
+var context;
+var x = 100;
+var y = 200;
+
+function init() {
+    canvas = document.getElementById('myCanvas');
+    context = canvas.getContext('2d');
+    requestAnimationFrame(draw);
+    canvas.addEventListener('mousemove', mover, false);
+}
+
+function ranColor() {
+    return 'rgb('+Math.floor((Math.random() * 255) + 1)+','+Math.floor((Math.random() * 255) + 1)+','+Math.floor((Math.random() * 255) + 1)+')';
+}
+function draw() {
+    context.fillStyle = 'blue';
+    context.fillRect(0,0,canvas.width,canvas.height);
+    gradientCircle(x,y,50,ranColor(),ranColor(),5,'black');
+    requestAnimationFrame(draw);
+}
+
+function mover(evt) {
+    var rect = canvas.getBoundingClientRect();
+    x = evt.clientX - rect.left;
+    y = evt.clientY - rect.top;
+}
+
+// this line starts the JavaScript file only after the window is loaded
+window.onload = init;
+</script>
+</head>
+
+<body>
+<canvas id="myCanvas" width="900" height="500">
+</canvas>
+<h1>The flashing circle follows the mouse</h1>
+</body>
+<script src="js/gradientCircle.js"></script> 
+</html>
