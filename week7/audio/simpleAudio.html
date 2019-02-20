@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Play video button example</title>
+<style type="text/css">
+	#music {
+		display: none;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	#storyBox {
+		padding: 10px;
+		background-color: #333;
+		color: white;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 20px;
+		text-align: justify;
+		width: 700px;
+		height: 200px;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		overflow-y: scroll;
+		
+	}
+	#buttonsBox {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 700px;
+		margin-top: 12px;
+		padding: 10px;
+		background-color: black;
+	}
+
+	#yes {
+		display: inline-block;
+		width: 300px;
+		background-color: green;
+		color: white;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 40px;
+		text-align: center;
+		cursor: pointer;
+	}
+	#no {
+		display: inline-block;
+		float: right;
+		width: 300px;
+		background-color: red;
+		color: white;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 40px;
+		text-align: center;
+		cursor: pointer;
+	}
+
+	.playText {
+		padding-top: 110px;
+	}
+	#picBox {
+		display: none;
+	}
+	#picBox img {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 300px;
+	}
+
+</style>
+<script type="text/javascript">
+/*
+	Because of Google Chrome autoplay policy, the user must
+	interact with the page before a video can play
+	This file has a div for the user to click
+*/
+	function init() {
+		// Add an event listener to the play box
+		document.getElementById("yes").addEventListener("click", yes);
+		document.getElementById("no").addEventListener("click", no);
+	}
+
+	function yes() {
+		// Make the buttons box invisible
+		document.getElementById("buttonsBox").style.display = "none";
+		// Show the image
+		document.getElementById("picBox").style.display = "block"
+		// Show the audio controls
+		document.getElementById('music').style.display = "block";
+		// Play the music
+		document.getElementById('music').play();
+		// Show the story text:
+		document.getElementById('storyBox').innerHTML = "<p>Although I am not disposed to maintain that the being born in a workhouse, is in itself the most fortunate and enviable circumstance that can possibly befall a human being, I do mean to say that in this particular instance, it was the best thing for Oliver Twist that could by possibility have occurred. The fact is, that there was considerable difficulty in inducing Oliver to take upon himself the office of respiration,—a troublesome practice, but one which custom has rendered necessary to our easy existence; and for some time he lay gasping on a little flock mattress, rather unequally poised between this world and the next: the balance being decidedly in favour of the latter. Now, if, during this brief period, Oliver had been surrounded by careful grandmothers, anxious aunts, experienced nurses, and doctors of profound wisdom, he would most inevitably and indubitably have been killed in no time. There being nobody by, however, but a pauper old woman, who was rendered rather misty by an unwonted allowance of beer; and a parish surgeon who did such matters by contract; Oliver and Nature fought out the point between them. The result was, that, after a few struggles, Oliver breathed, sneezed, and proceeded to advertise to the inmates of the workhouse the fact of a new burden having been imposed upon the parish, by setting up as loud a cry as could reasonably have been expected from a male infant who had not been possessed of that very useful appendage, a voice, for a much longer space of time than three minutes and a quarter.</p><p>You would need to finish your story by adding more buttons and more choices. Be sure to use JavaScript objects for this.</p>"
+	}
+	function no() {
+		document.getElementById('storyBox').innerHTML = "<br><br>That's too bad.  Maybe next time?"
+		document.getElementById("buttonsBox").style.display = "none";
+	}
+
+	window.onload=init;
+</script>
+
+</head>
+
+<body>
+<p>
+	<div id="picBox">
+		<img src="img/boys.jpg">
+	</div>
+	<div id="storyBox">
+		<p>I have a story about 3 young boys. Would you like to hear it?</p>
+	</div>
+	<div id="buttonsBox">
+		<div id="yes">Yes, please tell me!</div>
+		<div id="no">No, I don't want to hear it.</div>
+	</div>
+			
+		
+
+	<audio id="music" controls>
+	  <source src="sound/music.ogg" type="audio/ogg">
+	  <source src="sound/music.mp3" type="audio/mpeg">
+	Your browser does not support the audio element.
+	</audio>
+</p>
+
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Play video button example</title>
+<style type="text/css">
+	#vid {
+		width: 400px;
+		height: 300px;
+		display: none;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	#playBox {
+		background-color: red;
+		color: white;
+		font-family: Arial, Helvetica, sans-serif;
+		font-size: 40px;
+		text-align: center;
+		width: 400px;
+		height: 300px;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		cursor: pointer;
+	}
+	#playBox:hover {
+		background-color: black;
+	}
+	.playText {
+		padding-top: 110px;
+	}
+
+</style>
+<script type="text/javascript">
+/*
+	Because of Google Chrome autoplay policy, the user must
+	interact with the page before a video can play
+	This file has a div for the user to click
+*/
+	function init() {
+		// Add an event listener to the play box
+		document.getElementById("playBox").addEventListener("click", start);
+	}
+
+	function start() {
+		// Make the play box invisible
+		document.getElementById("playBox").style.display = "none";
+		// Show the video
+		document.getElementById('vid').style.display = "block";
+		// Play the video
+		document.getElementById('vid').play();
+	}
+
+	window.onload=init;
+</script>
+
+</head>
+
+<body>
+<p>
+	<div id="playBox">
+		<div class="playText">PLAY VIDEO</div>
+	</div>
+	<video id="vid">
+		<source src="vid/DuckandC1951.ogv">
+		<source src="vid/DuckandC1951.mp4">
+	</video>
+</p>
+
+</body>
+
+</html>

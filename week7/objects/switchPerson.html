@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Person object</title>
+<style type="text/css">
+	body {
+		text-align: center;
+	}
+	#figure {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		max-height: 200px;
+	}
+</style>
+<script>
+/*
+This example places a person in the HTML using a JSON object
+*/
+
+neoObject = {
+	name: "Neo",
+	imageURL: "img/NeoTheMatrix.jpg",
+	realName: "Thomas A. Anderson",
+	occupation: "hacker"
+}
+morpheusObject = {
+	name: "Morpheus",
+	imageURL: "img/morpheus.jpg",
+	occupation: "Captain of the Nebuchadnezzar"
+}
+trinityObject = {
+	name: "Trinity",
+	imageURL: "img/trinity.jpg",
+	occupation: "hacker / First Mate of the Nebuchadnezzar"
+}
+
+function init() {
+	image = document.getElementById('figure');
+	realName = document.getElementById('real_name');
+	occ = document.getElementById('occupation');
+	head = document.getElementById('head');
+	// Get the button by ID
+	neoBtn = document.getElementById('neoButton');
+	// Add Neo as a character parameter to the button
+	neoBtn.character = neoObject;
+	neoBtn.addEventListener("click", changeChar);
+
+	trinityBtn = document.getElementById('trinityButton');
+	trinityBtn.character = trinityObject;
+	trinityBtn.addEventListener("click", changeChar);
+
+	morpheusBtn = document.getElementById('morpheusButton');
+	morpheusBtn.character = morpheusObject;
+	morpheusBtn.addEventListener("click", changeChar);
+
+}
+/*
+	The target of an event is the object that was clicked
+	In this case it was a button
+	Access the character parameters of the buttons using target
+*/
+function changeChar(e) {
+	console.log(e.target.character);
+	figure.src = e.target.character.imageURL;
+	if(e.target.character.realName) {
+		realName.innerHTML = e.target.character.realName;
+	} else {
+		realName.innerHTML = 'UNKNOWN';
+	}
+	occ.innerHTML = e.target.character.occupation;
+	head.innerHTML = e.target.character.name;
+}
+    
+
+
+window.onload=init;
+</script>
+</head>
+
+<body>
+
+	<h1 id="head">Agent Smith</h1>
+	<img id="figure" src="img/agentSmith.jpg" alt="Neo">
+	<p><b>Real Name:</b> <span id="real_name">None</span></p>
+	<p><b>Occupation:</b> <span id="occupation">AI Program</span></p>
+
+	<button id="neoButton">Neo</button>
+	<button id="trinityButton">Trinity</button>
+	<button id="morpheusButton">Morpheus</button>
+
+</body>
+
+</html>

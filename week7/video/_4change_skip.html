@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Video control example</title>
+<script>
+/*
+FOR HELP-- VISIT THE W3 SCHOOLS PAGE ON VIDEO CONTROL:
+http://www.w3schools.com/html/html5_video.asp
+*/
+
+function init() {
+    var movie = document.getElementById('movie');
+    console.log(movie.currentTime);
+    movie.addEventListener('ended', function() { 
+	   this.currentTime = 145; 
+	   this.play();
+	}, false);
+}
+    
+function skip() {
+	movie.currentTime = 145;
+}
+function skip2() {
+	movie.currentTime = 100;
+}
+
+// You are changing the source for the video.
+function change() {
+	movie.src = "vid/FLINTSTONES.mp4";
+}
+
+window.onload=init;
+</script>
+</head>
+
+<body>
+<p>
+<video id="movie" autoplay controls>
+
+<source src="vid/DuckandC1951.ogv">
+
+</video>
+</p>
+<p>
+<button onclick="skip()">Skip</button>
+<button onclick="skip2()">Skip More!</button>
+<button onclick="change()">Change</button>
+
+
+</p>
+</body>
+
+</html>

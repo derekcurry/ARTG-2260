@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Neo object</title>
+<style type="text/css">
+	body {
+		text-align: center;
+	}
+	.image {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		max-height: 200px;
+	}
+</style>
+<script>
+/*
+This example uses a for/in statement with a JSON object
+See: https://www.w3schools.com/jsref/jsref_forin.asp 
+*/
+
+neoObject = {
+	name: "Neo",
+	imageURL: '<img class="image" src="img/NeoTheMatrix.jpg" alt="Neo">',
+	realName: "Thomas A. Anderson",
+	occupation: "hacker"
+}
+for(x in neoObject) {
+	console.log('KEY:', x);
+	console.log('VALUE:', neoObject[x])
+}
+
+function init() {
+	output = document.getElementById('neo');
+	// Loop through the Neo object and place each element in the neo div
+	for(x in neoObject) {
+		output.innerHTML = output.innerHTML + '<p><b>' + x +': </b>' + neoObject[x] +'</p>';
+
+	}
+}
+
+
+    
+
+
+window.onload=init;
+</script>
+</head>
+
+<body>
+
+	<div id="neo"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Objects + Video</title>
+<style type="text/css">
+	body {
+		text-align: center;
+		font-family: Arial;
+	}
+	.btnContainer button{
+		margin-top: 20px;
+		display: inline-block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	#button1 {
+		display: none;
+	}
+	#button2 {
+		display: none;
+	}
+	#button3 {
+		display: none;
+	}
+	#textBox {
+		width: 700px;
+		padding: 10px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 12px;
+		background-color: #222;
+		color: #eee;
+	}
+	#vid {
+		display: none;
+		margin-left: auto;
+		margin-right: auto;
+	}
+</style>
+<script>
+/*
+This example loads videos using JavaScript Objects
+
+These object must be listed in reverse order of their dependency--an object cannot contain another object that hasn't already been defined.  In otherwords, the first choice comes last, the and the second comes second to last, etc...
+*/
+var explosion = {
+	videoSRC: "vid/DuckandC1951.ogv", 
+	skip: 130,
+	text: "Whew, I'm sure glad the world is in safe hands now."
+}
+var flintstones = {
+	videoSRC: "vid/FLINTSTONES.mp4",
+	text: "Somehow, this seems like the saddest possible ending..."
+}
+var mic = {
+	videoSRC: "vid/MIC.ogv",
+	text: "Oh, s#%@%, you were right!",
+	skip: 501,
+	text: "But what is the worst that could happen?",
+	choice1: {
+		btnTxt: "Are you serious???",
+		nextState: explosion
+	}, 
+	choice2: {
+		btnTxt: "Just more of the same...",
+		nextState: flintstones
+	}
+}
+var computers = {
+	videoSRC: "vid/MIC.ogv",
+	text: "Okay, yeah, but didn't he also say something about the Military Industrial Complex?",
+	skip: 610,
+	choice1: {
+		btnTxt: "Maybe, let's find out.",
+		nextState: mic
+	}
+}
+var ike = {
+	videoSRC: "vid/MIC.ogv",
+	text: "Wait, is this the video where he says something about the Military Industrial Complex???",
+	choice1: {
+		btnTxt: "Yeah, I think so.",
+		nextState: mic
+	},
+	choice2: {
+		btnTxt: "No, I think it was something about computers.",
+		nextState: computers
+	}
+}
+var start = {
+	text: "Are you ready for some interactive fiction?",
+	choice1: {
+		btnTxt: "Yes, let's do this!",
+		nextState: ike
+	}
+}
+
+function init() {
+	video = document.getElementById('vid');
+	btn1 = document.getElementById('button1');
+	btn2 = document.getElementById('button2');
+	btn3 = document.getElementById('button3');
+	txtBox = document.getElementById('textBox');
+
+	loadState(start);
+
+}
+
+function loadState(state) {
+	console.log(state);
+	// Check if the state has a video:
+	if(state.videoSRC) {
+		video.style.display = "block";
+		video.src = state.videoSRC;
+		video.play()
+
+	} else {
+		video.style.display = "none";
+	}
+	// Check if we shoud skip
+	if(state.skip) {
+		video.currentTime = state.skip;
+	}
+	// Check if the state has text:
+	if(state.text) {
+		txtBox.style.display = "block";
+		txtBox.innerHTML = state.text;
+	} else {
+		txtBox.style.display = "none";
+	}
+	// Check if the state has buttons
+	if(state.choice1) {
+		// Show the button
+		btn1.style.display = "block"
+		// Change the text
+		btn1.innerHTML = state.choice1.btnTxt;
+		// Add an event listener
+		btn1.addEventListener("click", changeState);
+		// Add the next state as a property of the button
+		btn1.nextState = state.choice1.nextState;
+	} else {
+		btn1.style.display = "none";
+	}
+	if(state.choice2) {
+		// Show the button
+		btn2.style.display = "block"
+		// Change the text
+		btn2.innerHTML = state.choice2.btnTxt;
+		// Add an event listener
+		btn2.addEventListener("click", changeState);
+		// Add the next state as a property of the button
+		btn2.nextState = state.choice2.nextState;
+	} else {
+		btn2.style.display = "none";
+	}
+}
+
+function changeState(e) {
+	//use the next state property you added to the event to load the next state
+	loadState(e.target.nextState);
+}
+
+window.onload=init;
+</script>
+</head>
+
+<body>
+
+	<h1 id="head">Interactive (non)fiction</h1>
+	<div id="videoDiv">
+		<video id="vid" autoplay = True controls>
+			<source src="">
+		</video>
+	</div>
+
+	
+	<div id="textBox"></div>
+	<!-- You can always add more buttons -->
+	<div class="btnContainer">
+		<button id="button1"></button>
+		<button id="button2"></button>
+	</div>
+	
+
+</body>
+
+</html>
