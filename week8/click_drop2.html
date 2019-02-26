@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Click and Drop</title>
+<style>
+h1 {
+    text-align: center;
+}
+canvas { 
+    border:1px solid black; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.text {
+    text-align: center;
+}
+</style>
+<script>
+var canvas;
+var context;
+var x;
+var y;
+var circles = []
+
+function init() {
+    canvas = document.getElementById('myCanvas');
+    context = canvas.getContext('2d');
+    context.fillStyle = 'black';
+    context.fillRect(0,0,canvas.width,canvas.height);
+    canvas.addEventListener('mousedown', click, false);
+    requestAnimationFrame(draw);
+}
+
+function ranColor() {
+    return 'rgb('+Math.floor((Math.random() * 255) + 1)+','+Math.floor((Math.random() * 255) + 1)+','+Math.floor((Math.random() * 255) + 1)+')';
+}
+function click(evt) {
+    var rect = canvas.getBoundingClientRect();
+    x = evt.clientX - rect.left;
+    y = evt.clientY - rect.top;
+    // Make a new circle each time the user clicks
+    circle = {
+        x: x,
+        y: y
+    }
+    circles.push(circle);
+}
+/*
+    This draw function uses a forEach loop + an anonymous function
+    to draw each of the circles in the array and then removes 
+    them from the array when they are below the canvas
+*/
+
+
+function draw() {
+    context.fillStyle = 'black';
+    context.fillRect(0,0,canvas.width,canvas.height);
+
+    circles.forEach(function(circle) {
+        console.log(circle.x, circle.y);
+        gradientCircle(circle.x,circle.y,25,ranColor(),ranColor(),2,'black');
+        circle.y = circle.y + 1;
+        if(circle.y > canvas.height+25) {
+            // Use indexOf to get the specific circle you want to remove
+            circles.splice(circles.indexOf(circle), 1);
+        }
+    }, false);
+
+    requestAnimationFrame(draw);
+}
+
+
+// this line starts the JavaScript file only after the window is loaded
+window.onload = init;
+</script>
+</head>
+
+<body>
+<canvas id="myCanvas" width="900" height="500">
+</canvas>
+<h1>A circle appears wherever you click</h1>
+</body>
+<script src="js/gradientCircle.js"></script> 
+</html>

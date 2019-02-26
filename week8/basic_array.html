@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Basic Array</title>
+<style type="text/css">
+	body {
+		text-align: center;
+	}
+	
+</style>
+
+</head>
+
+<body>
+
+	<h1>Basic Arrays</h1>
+	<p>numArray: <span id="num"></span></p>
+	<p>first element: <span id="first"></span></p>
+	<p>Array length: <span id="len"></span></p>
+	<h2>Using a for loop to square each element:</h2>
+	<p>Array elements squared: <span id="square"></span></p>
+	<h2>Using a for each anonymous function:</h2>
+	<p>wordArray: <span id="word"></span></p>
+	<div id="sweets"></div>
+	
+	
+
+</body>
+<script type="text/javascript">
+	var numArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+	document.getElementById('num').innerHTML = numArray;
+	document.getElementById('first').innerHTML = numArray[0];
+	document.getElementById('len').innerHTML = numArray.length;
+
+	// Use a for loop to square each element in the array
+	for(i=0; i<numArray.length; i++) {
+		numArray[i] = numArray[i] * numArray[i]
+	}
+	// Notice that the array itself has changed!
+	document.getElementById('square').innerHTML = numArray;
+
+	// Words array
+	var wordArray = ['ice cream', 
+					'popcorn', 
+					'cookies',
+					'candy',
+					'cake']
+	document.getElementById('word').innerHTML = wordArray;
+
+	// Use a forEach loop with an anonymous function 
+	var sweets = document.getElementById('sweets');
+	wordArray.forEach(function(element){
+		console.log(element);
+		sweets.innerHTML = sweets.innerHTML + '<p>I like '+element+'!!!</p>';
+	}, false);
+
+</script>
+</html>
