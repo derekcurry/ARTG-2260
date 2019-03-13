@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Classic Horse animation</title>
+<style>
+canvas { border:1px solid black; }
+</style>
+<script>
+// Declare variables 
+var canvas;
+var ctx;
+var i = 0;  // Variable for moving from frame to frame
+
+// The draw function *** notice it's a recursive loop ***
+function draw() {
+    // Declare the sprite to draw
+    var sprite = document.getElementById('horse');
+
+    /* Draw variables: 
+    sprite, 
+    x position on the sprite, y position on the sprite, 
+    How far across on the sprite do you wan to display, how far down on the sprite do you want to display, 
+    the x start of the animation on the canvas, the y start of the image on the canvas, width of the animation, height of the animation 
+    */
+
+    ctx.drawImage(sprite,i*300,0,300,200,0,0,600,400);
+
+    // Here is the recursive loop!!!
+    requestAnimationFrame(draw);
+    }
+
+// Update function to move from frame to frame
+function update() {
+    i = (i+1)%15;
+}
+
+function init() {
+    canvas = document.getElementById('myCanvas');
+    ctx = canvas.getContext('2d');
+    // This controls how quickly the animation runs
+    window.setInterval(update,100);
+    requestAnimationFrame(draw);
+}
+
+// Don't forget to call init:
+window.onload = init;
+
+</script>
+</head>
+
+<body>
+<canvas id="myCanvas" width="600" height="400">
+</canvas>
+<p><a href="https://en.wikipedia.org/wiki/Eadweard_Muybridge">Eadweard Muybridge</a> was a pioneer in photography. In 1872, the former governor of California, Leland Stanford, a businessman and race-horse owner, hired Muybridge for some photographic studies. He had taken a position on a popularly debated question of the day – whether all four feet of a horse were off the ground at the same time while trotting. Muybridge began experimenting with an array of 12 cameras photographing a galloping horse in a sequence of shots (see above).</p>
+<img id="horse" src="img/Muybridge.png" style="display:none">
+</body>
+
+</html>

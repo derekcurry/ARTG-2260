@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Classic Horse animation</title>
+<style>
+canvas { border:1px solid black; }
+</style>
+<script>
+// Declare variables 
+var canvas;
+var ctx;
+var i = 0;  // Variable for moving from frame to frame
+var running = false;
+var keyPressed = [];
+// The draw function *** notice it's a recursive loop ***
+function draw() {
+    // Declare the sprite to draw
+    var sprite = document.getElementById('horse');
+
+    /*if (running) {
+        ctx.drawImage(sprite,i*300,0,300,200,0,0,600,400);
+    } else {
+        ctx.drawImage(sprite,i,0,300,200,0,0,600,400);
+    }*/
+    
+    ctx.drawImage(sprite,i*300,0,300,200,0,0,600,400);
+    // Here is the recursive loop!!!
+    requestAnimationFrame(draw);
+    }
+
+
+
+function init() {
+    canvas = document.getElementById('myCanvas');
+    ctx = canvas.getContext('2d');
+    window.setInterval(update,100);
+    requestAnimationFrame(draw);
+    window.onkeydown = keydown;
+    window.onkeyup = keyup;
+}
+
+// Update function to move from frame to frame
+function update() {
+    // Sets the running to true:
+    if (keyPressed['r']) {
+        running = true;
+    }
+    // Stops the running on the last frame:
+    if (i == 14) {
+        running = false;
+        i = 0;
+    }
+    // moves the integer for the animation
+    if (running) {
+        i = (i+1)%15;
+        console.log(i);
+    } else {
+        i = 0;
+    }
+}
+
+function keydown(e) {
+    keyPressed[e.key] = true;
+    }
+
+function keyup(e) {
+    keyPressed[e.key] = false;
+    }
+
+// Don't forget to call init:
+window.onload = init;
+
+</script>
+</head>
+
+<body>
+<canvas id="myCanvas" width="600" height="400">
+</canvas>
+<h3>Press 'r' to make the horse run once.</h3>
+<img id="horse" src="img/Muybridge.png" style="display:none">
+</body>
+
+</html>
