@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CSS Boxes</title>
+<style>
+canvas { border:1px solid black; }
+.box-container {
+    display: block;
+}
+.box {
+    color: white;
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    background-color: green;
+    border-width: 3px;
+    cursor: pointer;
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+    font-size: 30px;
+}
+.box:hover {
+    color:red;
+    background-color: blue;
+
+}
+</style>
+
+</head>
+
+<body>
+<div class="box-container">
+    <div class="box">One</div>
+    <div class="box">Two</div>
+</div>
+
+<div class="box-container">
+    <div class="box">Three</div>
+    <div class="box">Four</div>
+</div>
+
+</body>
+
+</html>
