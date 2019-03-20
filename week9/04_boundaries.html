@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>4 direction Sprite</title>
+<style>
+canvas { border:1px solid black; }
+</style>
+<script>
+
+var canvas;
+var ctx;
+var walk_speed = 10;
+var i = 0;
+var x = 300;
+var y = 300;
+var keyPressed = {};
+var ySprite = 0;
+
+// The object for martian
+var martin = {
+        sourceX: 0,
+        sourceY: 128,
+        sizeX: 64,
+        sizeY: 64,
+        posX: 50,
+        posY: 200,
+        width: 100,
+        height: 100,
+        offset: 50
+    };
+
+
+function draw() {
+    var img = document.getElementById("background");
+    ctx.drawImage(img, 0, 0, 340, 120, 0, 0, 340*3.8, 120*3.8);
+    var sprite = document.getElementById('martian');
+    //ctx.drawImage(sprite,i*64,ySprite,64,64,x, y,75,75);
+
+    ctx.drawImage(sprite, martin.sourceX*64, martin.sourceY, martin.sizeX,martin.sizeY, martin.posX, martin.posY, martin.width, martin.height);
+    requestAnimationFrame(draw);
+    }
+    
+
+
+function update() {
+    if ((keyPressed['Right']) || (keyPressed['ArrowRight'])) {
+        martin.sourceY = 128;
+        martin.sourceX = (martin.sourceX+1)%4;
+        if(martin.posX < 565) {
+            martin.posX = martin.posX + walk_speed;
+            martin.sourceY = 128;
+        }
+    }
+    else if ((keyPressed['Left']) || (keyPressed['ArrowLeft'])) {
+        martin.sourceY = 64;
+        martin.sourceX = (martin.sourceX+1)%4;
+        if(martin.posX > -25) {
+            martin.posX = martin.posX - walk_speed;
+            martin.sourceY = 64;
+        }
+
+    }
+     else if ((keyPressed['Up']) || (keyPressed['ArrowUp'])){
+        //console.log(martin.)
+        martin.sourceX = (martin.sourceX+1)%4;
+        martin.sourceY = 192;
+        if(martin.posY >= 180) {
+            martin.posY = martin.posY - walk_speed;
+        }
+    }
+     else if ((keyPressed['Down']) || (keyPressed['ArrowDown'])) {
+     	martin.sourceX = (martin.sourceX+1)%4;
+        martin.sourceY = 0;
+        if(martin.posY < 350) {
+            martin.posY = martin.posY + walk_speed;
+        }
+    }
+}
+
+function keydown(e) {
+    keyPressed[e.key] = true;
+}
+
+function keyup(e) {
+    keyPressed[e.key] = false;
+    i = 0;
+}
+
+function init() {
+    canvas = document.getElementById('myCanvas');
+    ctx = canvas.getContext('2d');
+    window.setInterval(update,50);
+    requestAnimationFrame(draw);
+    window.onkeydown = keydown;
+    window.onkeyup = keyup;
+}
+
+window.onload = init;
+
+
+</script>
+</head>
+
+<body>
+<canvas id="myCanvas" width="640" height="447">
+</canvas>
+<img id="background" src="img/Snow.png" style="display:none">
+<img id="martian" src="img/martin.png" style="display:none">
+
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Walk 2 directions</title>
+<style>
+canvas { border:1px solid black; }
+</style>
+<script>
+var canvas;
+var ctx;
+var sprite;
+
+function init() {
+    canvas = document.getElementById('myCanvas');
+    ctx = canvas.getContext('2d');
+    sprite = document.getElementById('martian');
+    window.setInterval(update,50);
+    requestAnimationFrame(draw);
+    window.onkeydown = keydown;
+    window.onkeyup = keyup;
+}
+
+var keyPressed = {};
+
+// The object for martian
+var martin = {
+        sourceX: 0,
+        sourceY: 128,
+        sizeX: 64,
+        sizeY: 64,
+        posX: 100,
+        posY: 200,
+        disWidth: 100,
+        disHeight: 100
+    };
+
+// The animation magic...
+function draw() {
+    ctx.fillStyle = '#33FFFF';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    // Drawing the sprite character from the object
+    ctx.drawImage(sprite, martin.sourceX*64, martin.sourceY, martin.sizeX, martin.sizeY, martin.posX, martin.posY, martin.disWidth, martin.disHeight);
+    requestAnimationFrame(draw);
+}
+
+// What moves the little boy around
+function update() {
+    if ((keyPressed['Right']) || (keyPressed['ArrowRight'])) {
+            martin.sourceY = 128;
+            martin.sourceX = (martin.sourceX+1)%4;
+            martin.posX = martin.posX + 10;
+            //console.log(i);
+        }
+        
+    else if ((keyPressed['Left']) || (keyPressed['ArrowLeft'])) {
+            martin.sourceY = 64;
+            martin.sourceX = (martin.sourceX+1)%4;
+            martin.posX = martin.posX - 10;
+
+        }
+    else {
+        martin.sourceY = 0;
+
+    }
+
+}
+
+function keydown(e) {
+    keyPressed[e.key] = true;
+}
+
+function keyup(e) {
+    keyPressed[e.key] = false;
+}
+
+// Don't forget to actually initialize
+window.onload = init;
+</script>
+</head>
+
+<body>
+<canvas id="myCanvas" width="500" height="500">
+</canvas>
+<img id="martian" src="img/martin.png" style="display:none">
+</body>
+
+</html>
